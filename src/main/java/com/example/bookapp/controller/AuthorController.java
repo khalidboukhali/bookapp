@@ -3,6 +3,7 @@ package com.example.bookapp.controller;
 import com.example.bookapp.dto.requestDto.AuthorRequestDto;
 import com.example.bookapp.dto.responseDto.AuthorResponseDto;
 import com.example.bookapp.service.AuthorService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +32,7 @@ public class AuthorController {
     }
 
     @PostMapping
-    public ResponseEntity<String> addAuthor(@RequestBody AuthorRequestDto authorDto){
+    public ResponseEntity<String> addAuthor(@RequestBody @Valid AuthorRequestDto authorDto){
         try {
             this.authorService.addAuthor(authorDto);
             return ResponseEntity.status(HttpStatus.CREATED).body("Author added successfully");
@@ -41,7 +42,7 @@ public class AuthorController {
     }
 
     @PutMapping("/{authorId}")
-    public ResponseEntity<String>  updateAuthor(@PathVariable long authorId, @RequestBody AuthorRequestDto authorDto){
+    public ResponseEntity<String>  updateAuthor(@PathVariable long authorId,@RequestBody @Valid AuthorRequestDto authorDto){
         try {
             this.authorService.updateAuthor(authorId, authorDto);
             return ResponseEntity.status(HttpStatus.OK).body("Author updated successfully");

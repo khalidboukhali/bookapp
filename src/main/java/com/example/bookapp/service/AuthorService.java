@@ -39,6 +39,7 @@ public class AuthorService {
     }
 
     public void updateAuthor(long authorId, AuthorRequestDto updatedAuthorDto) {
+        getAuthorById(authorId);
         Author author = AuthorMapper.INSTANCE.toEntity(updatedAuthorDto);
         author.setId(authorId);
         this.authorRepository.save(author);
